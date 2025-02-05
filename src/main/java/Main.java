@@ -1,16 +1,19 @@
-import java.io.*; 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.time.Instant;
-import java.util.*;
-import java.util.zip.DeflaterOutputStream;
-import java.util.zip.InflaterInputStream;
+import java.io.*;  // For file handling and input-output operations
+import java.net.HttpURLConnection; // For making API requests
+import java.net.URL; // For URL handling
+import java.nio.charset.StandardCharsets; // Encoding support
+import java.nio.file.Files; // File reading/writing
+import java.nio.file.Path; // Handling file paths
+import java.nio.file.Paths; // Path manipulations
+import java.security.MessageDigest; // For hashing (like Git)
+import java.security.NoSuchAlgorithmException; // Handling hashing errors
+import java.time.Instant; // Handling timestamps
+import java.util.*; // Data structures like List, Map, Scanner
+import java.util.zip.DeflaterOutputStream; // For compression (like Git blobs)
+import java.util.zip.InflaterInputStream; // For decompression
+import java.net.http.HttpClient; // For modern HTTP requests
+import java.net.http.HttpRequest; // For building HTTP requests
+import java.net.http.HttpResponse; // Handling HTTP responses
 
 public class Main {
     public static void main(String[] args) throws IOException { 
@@ -54,7 +57,29 @@ public class Main {
                 System.out.println(commitHash);
                 break;
             }
-
+            case "auth" -> {
+                String authToken = SpotifyAuth.getAccessToken();
+                System.out.println("Authenticated. Access Token: " + authToken);
+            }
+            
+            case "fetch-playlists" -> {
+                String accessToken = getStoredAccessToken();
+                String playlists = SpotifyAPI.getUserPlaylists(accessToken);
+                System.out.println("Playlists: " + playlists);
+            }
+            
+            case "add-song" -> {
+                if (args.length < 3) {
+                    throw new IllegalArgumentException("Usage: java Main add-song <playlist_id> <track_uri>");
+                }
+                String accessToken = getStoredAccessToken();
+                String playlistId = args[1];
+                String trackUri = args[2];
+            
+                String response = SpotifyAPI.addTrackToPlaylist(accessToken, playlistId, trackUri);
+                System.out.println("Track added: " + response);
+            }
+            
             default -> System.out.println("Unknown command: " + command);
         }
     }
