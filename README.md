@@ -1,60 +1,40 @@
 [![progress-banner](https://backend.codecrafters.io/progress/git/20329ca1-0db7-458b-a743-41419a7518ad)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
 
-This is a starting point for Java solutions to the
-["Build Your Own Git" Challenge](https://codecrafters.io/challenges/git).
+# Build-Your-Own-Git
 
-In this challenge, you'll build a small Git implementation that's capable of
-initializing a repository, creating commits and cloning a public repository.
-Along the way we'll learn about the `.git` directory, Git objects (blobs,
-commits, trees etc.), Git's transfer protocols and more.
+This project is a Java-based implementation of Git, developed as part of the ["Build Your Own Git" Challenge](https://codecrafters.io/challenges/git) by Codecrafters. This project aims to deepen understanding of Git's internal mechanics by recreating some of its core functionalities from scratch.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+## Features
 
-# Passing the first stage
+- **Repository Initialization**: Initialize a new Git repository.
+- **Commit Creation**: Stage changes and create commits.
+- **Repository Cloning**: Clone existing public repositories.
+- **Object Management**: Handle Git objects such as blobs, trees, and commits.
 
-The entry point for your Git implementation is in `src/main/java/Main.java`.
-Study and uncomment the relevant code, and push your changes to pass the first
-stage:
+## Getting Started
 
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
+### Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/avanimathur/Git-CodeCrafter.git
+   cd Git-CodeCrafter
+
+Sample Commands :
+
+```bash
+javac src/main/java/Main.java
 ```
 
-That's all!
-
-# Stage 2 & beyond
-
-Note: This section is for stages 2 and beyond.
-
-1. Ensure you have `mvn` installed locally
-1. Run `./your_program.sh` to run your Git implementation, which is implemented
-   in `src/main/java/Main.java`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
-
-# Testing locally
-
-The `your_program.sh` script is expected to operate on the `.git` folder inside
-the current working directory. If you're running this inside the root of this
-repository, you might end up accidentally damaging your repository's `.git`
-folder.
-
-We suggest executing `your_program.sh` in a different folder when testing
-locally. For example:
-
-```sh
-mkdir -p /tmp/testing && cd /tmp/testing
-/path/to/your/repo/your_program.sh init
+```bash
+javac -d out src/main/java/Main.java
 ```
-
-To make this easier to type out, you could add a
-[shell alias](https://shapeshed.com/unix-alias/):
-
-```sh
-alias mygit=/path/to/your/repo/your_program.sh
-
-mkdir -p /tmp/testing && cd /tmp/testing
-mygit init
+```bash
+java -cp out src/Main/java/Main.java init
+```
+```bash
+java -cp out src/Main/java/Main.java cat-file -p <commit_hash>
+```
+```bash
+java -cp out src/Main/java/Main.java ls-tree --name-only <commit_hash>
 ```
