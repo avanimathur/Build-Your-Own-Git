@@ -6,7 +6,6 @@ This project is a Java-based implementation of Git, developed as part of the ["B
 
 - **Repository Initialization**: Initialize a new Git repository.
 - **Commit Creation**: Stage changes and create commits.
-- **Repository Cloning**: Clone existing public repositories.
 - **Object Management**: Handle Git objects such as blobs, trees, and commits.
 
 ## Getting Started
